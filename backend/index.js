@@ -1,5 +1,5 @@
-import express from "express";
-import { PrismaClient } from "@prisma/client";
+const express = require("express");
+const { PrismaClient } = require("@prisma/client");
 
 const primaClient = new PrismaClient();
 
@@ -17,10 +17,16 @@ app.use((req, res, next) => {
 });
 
 // Test Api with error for docker compare this container is healthy
-app.get("test-api-healthy", (req, res) => {
+app.get("/test-api-healthy", (_, res) => {
   try {
     res.status(200).send({ message: "Api is working" });
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
+});
+
+const PORT = process.env.PORT ?? 4000;
+
+app.listen(PORT, () => {
+  console.log("The api is working");
 });

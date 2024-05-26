@@ -40,6 +40,25 @@ services:
     volumes:
       - ./pgadmin-data:/var/lib/pgadmin
 
+  backend:
+    container_name: backend
+    image: backend
+    build:
+      context: ./backend
+      dockerfile: backend.dockerfile
+    ports:
+      - 4000:4000
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app_todo
+    volumes:
+      - ./backend:/app
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/db_test?schema=public
+      PORT: 4000
+
 networks:
   app_todo:
     name: app_todo_network

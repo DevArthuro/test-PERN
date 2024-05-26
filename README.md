@@ -49,3 +49,18 @@ PGADMIN_DEFAULT_PASSWORD: *
 ## Backend
 
 the prisma conection you can find it inside backend folder and .env.example file
+
+before you run the backend you should to execute the command the generate prisma
+
+like this
+`npx prisma generate`
+
+# Migration
+
+You must to run the migration for the correctly functionality it does with next command
+
+**If you uses docker**
+`docker exec -it backend npx prisma migrate dev --name init` // Inside the container the container_name is the name of container backed registred
+
+**If you not use docker**
+`npx prisma migrate dev --name init` // container_name is the name of container backed registred
