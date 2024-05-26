@@ -1,5 +1,5 @@
 import CardComponent from "@/components/cardComponent";
-import { getAllUsers } from "@/handlers/users";
+import { getAllUsers } from "@/handlers";
 import { UserData } from "@/types";
 import { useEffect, useState } from "react";
 
