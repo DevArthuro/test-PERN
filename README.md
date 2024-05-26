@@ -1,3 +1,12 @@
+# Tecnologies used
+
+- **node**
+- **docker and compose**
+- **next**
+- **postgres and pgadmin**
+- **Prisma**
+- **Tailwind**
+
 # RUN PROJECT
 
 compose.yml contain the services
