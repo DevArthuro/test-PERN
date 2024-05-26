@@ -1,7 +1,5 @@
-const express = require("express");
-const { PrismaClient } = require("@prisma/client");
-
-const primaClient = new PrismaClient();
+import express from "express";
+import router from "./routes/index.mjs";
 
 const app = express();
 
@@ -15,6 +13,9 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
+
+// Router register
+app.use("/api-v1", router);
 
 // Test Api with error for docker compare this container is healthy
 app.get("/test-api-healthy", (_, res) => {

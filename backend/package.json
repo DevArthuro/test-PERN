@@ -2,10 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "backend with express and prisma",
-  "main": "index.js",
+  "main": "index.mjs",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --watch index.js --host 0.0.0.0"
+    "dev": "node --watch index.mjs --host 0.0.0.0"
   },
   "author": "carlos",
   "license": "ISC",
