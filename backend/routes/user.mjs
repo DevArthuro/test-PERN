@@ -1,12 +1,13 @@
 import express from "express";
-import { dbConnection as db } from "../db/index.mjs";
+import { PrismaClient } from "@prisma/client";
 
+const db = new PrismaClient();
 const app = express.Router();
 
 // get all users
 app.get("/", async (_, res) => {
   try {
-    const users = await db().user.findMany();
+    const users = await db.user.findMany();
     res.status(200).send(users);
   } catch (error) {
     res.status(500).send({ message: error.message });
@@ -17,7 +18,7 @@ app.get("/", async (_, res) => {
 app.get("/:id_user", async (req, res) => {
   try {
     const { id_user } = req.params;
-    const user = await db().user.findUnique({
+    const user = await db.user.findUnique({
       where: {
         id: Number(id_user),
       },
@@ -32,7 +33,8 @@ app.get("/:id_user", async (req, res) => {
 app.post("/", async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    const user = await db().user.create({
+    console.log(req.body);
+    const user = await db.user.create({
       data: {
         name,
         email,
@@ -56,7 +58,7 @@ app.patch("/:id_user", async (req, res) => {
         .send({ message: "not receipt any attribute allowed for change" });
     }
     const { id_user } = req.params;
-    const user = await db().user.update({
+    const user = await db.user.update({
       where: {
         id: Number(id_user),
       },
@@ -72,7 +74,7 @@ app.patch("/:id_user", async (req, res) => {
 app.delete("/:id_user", async (req, res) => {
   try {
     const { id_user } = req.params;
-    const user = await db().user.delete({
+    const user = await db.user.delete({
       where: {
         id: Number(id_user),
       },
