@@ -1,10 +1,10 @@
 import UserForm from "@/common/userForm";
-import { getUser } from "@/handlers";
-import { UserData } from "@/types";
+import { editUser, getUser } from "@/handlers";
+import { UserData, UserDataExcludeId } from "@/types";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 interface Props {
   user: UserData;
@@ -21,11 +21,6 @@ const UserDetails = () => {
     throw new Error("The user id is not provided");
   }
 
-  // const handleCreateUser = async (values: UserDataExcludeId) => {
-  //   createUser(values);
-  //   toast("Usuario Editado");
-  // };
-
   useEffect(() => {
     const fetchUser = async () => {
       const userFetched = await getUser(userId);
@@ -37,13 +32,24 @@ const UserDetails = () => {
     fetchUser();
   }, [userId]);
 
+  const handleEditUser = async (values: UserDataExcludeId) => {
+    console.log(values);
+    const response = await editUser(Number(userId), values);
+    if (response.data && response.status) {
+      setUser({ ...user, ...response.data });
+      toast("Usuario Editado");
+      return;
+    }
+    toast("No logramos editar su usuario");
+  };
+
   return (
     <>
       <ToastContainer />
       {user ? (
         <UserForm
           user={{ name: user.name, email: user.email }}
-          onSubmit={() => {}}
+          onSubmit={handleEditUser}
         >
           <p>You can edit your information</p>
         </UserForm>

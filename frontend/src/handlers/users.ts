@@ -46,3 +46,17 @@ export const deleteUser = async (
     return { status: false };
   }
 };
+
+export const editUser = async (
+  id_user: number,
+  dataChange: UserDataExcludeId
+): Promise<{ data?: UserData; status: boolean }> => {
+  try {
+    const response = await request.patch(`/users/${id_user}`, dataChange);
+    const data: UserData = await response.data;
+    return { status: true, data };
+  } catch (error) {
+    console.log("Error fetching data", error);
+    return { status: false };
+  }
+};
