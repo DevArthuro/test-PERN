@@ -63,11 +63,14 @@ const UserDetails = () => {
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context
 ) => {
+  console.log(context.query);
   if (typeof context.query.userId !== "string") {
     throw new Error("The user id is not provided");
   }
 
   const user = await getUser(context.query.userId);
+
+  console.log(user);
 
   if (!user) {
     throw new Error("The user id is not found");
