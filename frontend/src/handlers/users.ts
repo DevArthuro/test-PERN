@@ -5,6 +5,16 @@ export const getAllUsers = async () => {
   try {
     const response = await request.get("/users");
     const data: UserData[] = await response.data;
+    return data.reverse();
+  } catch (error) {
+    console.log("Error fetching data", error);
+  }
+};
+
+export const getUser = async (id_user: string) => {
+  try {
+    const response = await request.get(`/users/${id_user}`);
+    const data: UserData = await response.data;
     return data;
   } catch (error) {
     console.log("Error fetching data", error);

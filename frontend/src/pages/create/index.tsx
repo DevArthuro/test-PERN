@@ -1,12 +1,18 @@
 import UserForm from "@/common/userForm";
 import { createUser } from "@/handlers";
 import { UserDataExcludeId } from "@/types";
+import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 
 const CreateUser = () => {
+  const router = useRouter();
+
   const handleCreateUser = async (values: UserDataExcludeId) => {
-    createUser(values);
-    toast("Usuario creado");
+    const userData = await createUser(values);
+    if (userData.status) {
+      router.push(`/${userData.data?.id}`);
+    }
+    toast("We can create the user");
   };
 
   return (
