@@ -42,7 +42,7 @@ services:
 
   backend:
     container_name: backend
-    image: backend
+    image: carlosorrego/backend
     build:
       context: ./backend
       dockerfile: backend.dockerfile
@@ -62,7 +62,7 @@ services:
 
   frontend:
     container_name: frontend
-    image: frontend
+    image: carlosorrego/frontend
     build:
       context: ./frontend
       dockerfile: frontend.dockerfile
