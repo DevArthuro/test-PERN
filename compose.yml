@@ -60,6 +60,22 @@ services:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/db_test?schema=public
       PORT: 4000
 
+  frontend:
+    container_name: frontend
+    image: frontend
+    build:
+      context: ./frontend
+      dockerfile: frontend.dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+    networks:
+      - app_todo
+    restart: always
+    environment:
+      NEXT_PUBLIC_API_URL: http://backend:4000/api-v1
+
 networks:
   app_todo:
     name: app_todo_network
