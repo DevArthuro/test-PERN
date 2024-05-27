@@ -33,7 +33,6 @@ app.get("/:id_user", async (req, res) => {
 app.post("/", async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    console.log(req.body);
     const user = await db.user.create({
       data: {
         name,

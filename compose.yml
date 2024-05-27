@@ -48,6 +48,7 @@ services:
       dockerfile: backend.dockerfile
     ports:
       - 4000:4000
+      - 5555:5555 # The prisma studio, before you must run the command can find it in README.md
     depends_on:
       db:
         condition: service_healthy
