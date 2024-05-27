@@ -25,7 +25,7 @@ const UserForm: React.FC<Props> = ({ user, children, onSubmit }) => {
           Return
         </button>
       </div>
-      <Formik initialValues={{ ...user }} onSubmit={onSubmit}>
+      <Formik initialValues={user} onSubmit={onSubmit}>
         {({ values, handleSubmit, handleChange }): JSX.Element => (
           <Form
             onSubmit={handleSubmit}

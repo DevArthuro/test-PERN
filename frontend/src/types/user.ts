@@ -5,4 +5,6 @@ export interface UserData {
   password: string;
 }
 
-export interface UserDataExcludeId extends Omit<UserData, "id"> {}
+export interface UserDataExcludeId extends Omit<UserData, "id" | "password"> {
+  password?: string | undefined;
+}
