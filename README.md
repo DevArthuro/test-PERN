@@ -62,7 +62,11 @@ the prisma conection you can find it inside backend folder and .env.example file
 before you run the backend you should to execute the command the generate prisma
 
 like this
-`npx prisma generate`
+`npx prisma generate` but this already running in dockerfile
+
+If u want a front to watch the data run this command
+
+`docker exec -it backend npx prisma studio` // Run this command when the container is running
 
 # Migration
 
